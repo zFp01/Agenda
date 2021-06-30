@@ -1,0 +1,90 @@
+import replit
+
+nomes = []
+idades = []
+telefones = []
+
+def criar_contato():
+  nome = input("Digite o nome do contato:")
+  nomes.append(nome)
+  idade = input("Digite a idade do contato:")
+  idades.append(idade)
+  telefone = input("Digite o telefone do contato")
+  telefones.append(telefone)
+
+def imprimir_contatos():
+  for i in range(0,len(nomes)):
+    print("Contato",i)
+    print("Nome:",nomes[i])
+    print("Idade:",idades[i])
+    print("Telefone:",telefones[i])
+    print("-----------------------------------")
+    print()
+
+def atualizar_contato():
+  print("Digite o identificador do contato")
+  i = int(input())
+  nomes[i] = input("Digite o nome do contato:")
+  idades[i] = input("Digite a idade do contato:")
+  telefones[i] = input("Digite o telefone do contato:")
+
+def remover_contato():
+  print("Digite o identificador do contato")
+  i = int(input())
+  nomes.pop(i)
+  idades.pop(i)
+  telefones.pop(i)
+
+def salvar_agenda():
+  arquivo = open("agenda.txt","wt")
+  for i in range(len(nomes)):
+    arquivo.write(nomes[i] + ";" + idades[i] + ";" + telefones[i] + "\n")
+  arquivo.close()
+  print("Arquivo salvo!")
+
+def abrir_agenda():
+  nomes.clear()
+  idades.clear()
+  telefones.clear()
+  arquivo = open("agenda.txt","rt")
+  contatos = arquivo.read().split("\n")
+  for i in range(len(contatos)-1):
+    dados_contato = contatos[i].split(";")
+    #Pego o nome e adiciono no vetor de nomes
+    nomes.append(dados_contato[0]) 
+    #Pego a idade e adiciono no vetor de idades
+    idades.append(dados_contato[1])
+    #Pego o telefone e adiciono no vetor de telefones
+    telefones.append(dados_contato[2])
+  arquivo.close()
+  print("Dados carregados em memória RAM!")
+
+
+
+escolha = -1
+while escolha != 7:
+  print("Escolha uma opção:")
+  print("1 - Criar Contato")
+  print("2 - Imprimir Contatos")
+  print("3 - Atualizar Contato")
+  print("4 - Remover Contato")
+  print("5 - Abrir Agenda");
+  print("6 - Salvar Agenda")
+  print("7 - Sair")
+  escolha = int(input())
+
+  if escolha == 1:
+    criar_contato()
+  elif escolha == 2:
+    imprimir_contatos()
+  elif escolha == 3:
+    atualizar_contato()
+  elif escolha == 4:
+    remover_contato()
+  elif escolha == 5:
+    abrir_agenda()
+  elif escolha == 6:
+    salvar_agenda()
+
+  input("Digite ENTER para continuar...")
+  replit.clear()
